@@ -17,7 +17,7 @@ if [ $stat != 0 ]; then
 else 
 	echo "Databases backed-up localy to $LOCAL_DB_BACKUP_FOLDER";
 
-	scp -P 2560 ${LOCAL_DB_BACKUP_FOLDER}/*-$DOW.sql.gz HOSTNAME@backup:$REMOTE_FILES_BACKUP_FOLDER
+	scp -P 2560 ${LOCAL_DB_BACKUP_FOLDER}/*-$DOW.sql.gz HOSTNAME@backup:$REMOTE_DB_BACKUP_FOLDER
 	stat=$?;
 
 	if [ $stat == 0 ]; then
