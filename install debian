@@ -1,0 +1,113 @@
+ssh key-gen
+ssh-copy-id
+mkdir ~/.ssh
+cd ~/.ssh
+nano authorized_keys  # Kopiramo ssh kljuc
+wget -O /etc/ssh/sshd_config https://raw.githubusercontent.com/cubes-doo/hosting/master/configs/ssh/sshd_config
+service sshd restart
+
+
+				
+				
+				
+wget -O /home/.ssh/config https://raw.githubusercontent.com/mil4ndjcubes/cubes_hosting/main/host.config  
+
+
+
+				
+				
+apt install nftables
+wget -O /etc/nftables.conf https://raw.githubusercontent.com/cubes-doo/hosting/master/configs/nftables/nftables.conf
+systemctl enable nftables
+systemctl restart nftables
+
+
+							
+							
+apt-get -y install curl gnupg2 ca-certificates lsb-release
+echo "deb http://nginx.org/packages/debian `lsb_release -cs` nginx" | tee /etc/apt/sources.list.d/nginx.list
+curl -fsSL https://nginx.org/keys/nginx_signing.key | apt-key add -
+apt-get -y update
+apt-get -y install nginx
+systemctl enable nginx
+mkdir /etc/nginx/sites-available
+mkdir /etc/nginx/sites-enabled
+mkdir /etc/nginx/ssl
+openssl req -nodes -subj "/C=RS/ST=Serbial/L=Belgrade/O=Cubes/CN=www.cubes.rs" -x509 -newkey rsa:4096 -keyout /etc/nginx/ssl/server-key.pem -out /etc/nginx/ssl/server-cert.pem -days 3650
+wget -O /etc/nginx/nginx.conf https://raw.githubusercontent.com/cubes-doo/hosting/master/configs/nginx/nginx.conf
+wget -O /etc/nginx/conf.d/default.conf https://raw.githubusercontent.com/cubes-doo/hosting/master/configs/nginx/conf.d/default.conf
+wget -O /etc/nginx/conf.d/fastcgi_cache.conf https://raw.githubusercontent.com/cubes-doo/hosting/master/configs/nginx/conf.d/fastcgi_cache.conf
+wget -O /usr/share/nginx/html/index.html https://raw.githubusercontent.com/cubes-doo/hosting/master/files/index.html
+service nginx restart
+
+
+
+						
+							
+							
+
+apt-get -y install mariadb-server
+wget -O /etc/mysql/mariadb.conf.d/99-performance-tunning.cnf https://raw.githubusercontent.com/cubes-doo/hosting/master/configs/mysql/mariadb.conf.d/99-performance-tunning.cnf
+systemctl enable mariadb
+systemctl restart mariadb
+mysql
+MariaDB ~ CREATE USER 'phpmyadmin'@'%' IDENTIFIED BY '********';
+MariaDB ~ GRANT ALL PRIVILEGES ON *.* TO 'phpmyadmin'@'%' WITH GRANT OPTION;
+MariaDB ~ FLUSH PRIVILEGES;
+
+
+
+
+/etc/mysql# mysqldump -u phpmyadmin -p CubesDB > ~/cubesdb.sql # Export baze
+/etc/mysql# mysql -u phpmyadmin -p CubesDB < ~/cubesdb.sql # Import baze
+service mariadb restart
+
+
+
+							
+							
+							
+apt-get -y install vsftpd libpam-pwdfile apache2-utils whois
+mkdir -p /etc/vsftpd/users
+wget -O /etc/vsftpd.conf https://raw.githubusercontent.com/cubes-doo/hosting/master/configs/vsftpd/vsftpd.conf
+wget -O /etc/pam.d/vsftpd https://raw.githubusercontent.com/cubes-doo/hosting/master/configs/vsftpd/pam.d/vsftpd
+wget -O /etc/vsftpd/ftp_users_passwd.sh https://raw.githubusercontent.com/cubes-doo/hosting/master/scripts/ftp_users_passwd.sh
+chmod +x /etc/vsftpd/ftp_users_passwd.sh
+touch /etc/vsftpd/users.passwd
+systemctl enable vsftpd
+systemctl restart vsftpd
+
+wget -O /etc/vsftpd/cubes https://raw.githubusercontent.com/mil4ndjcubes/cubes_hosting/main/vsftpd.user.conf
+
+
+
+./ftp_users_passwd.sh
+
+
+
+							
+							
+apt-get -y install apt-transport-https lsb-release ca-certificates curl
+curl -sSL -o /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
+sh -c 'echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list'
+apt-get -y update
+apt-get -y install php7.4-fpm
+apt-get -y install php7.4-cli
+apt-get -y install php7.4-mbstring 
+apt-get -y install php7.4-mysql
+wget -O /etc/php/7.4/fpm/pool.d/www.conf https://raw.githubusercontent.com/cubes-doo/hosting/master/configs/php/fpm/pool.d/www.conf
+systemctl enable php7.4-fpm
+systemctl restart php7.4-fpm
+
+
+
+							
+						
+							
+wget https://files.phpmyadmin.net/phpMyAdmin/5.0.4/phpMyAdmin-5.0.4-all-languages.tar.gz
+tar -xzf phpMyAdmin-5.0.4-all-languages.tar.gz
+mv phpMyAdmin-5.0.4-all-languages /usr/share/phpmyadmin
+rm phpMyAdmin-5.0.4-all-languages.tar.gz
+wget -O /usr/share/phpmyadmin/config.inc.php https://raw.githubusercontent.com/cubes-doo/hosting/master/configs/phpmyadmin/config.inc.php
+mkdir /usr/share/phpmyadmin/tmp
+chmod 777 /usr/share/phpmyadmin/tmp
