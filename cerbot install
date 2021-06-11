@@ -1,0 +1,7 @@
+apt-get update
+apt-get install snapd
+snap install core
+snap install --classic certbot
+certbot --nginx
+ln -s /snap/bin/certbot 
+certbot --nginx
