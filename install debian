@@ -111,3 +111,15 @@ rm phpMyAdmin-5.0.4-all-languages.tar.gz
 wget -O /usr/share/phpmyadmin/config.inc.php https://raw.githubusercontent.com/cubes-doo/hosting/master/configs/phpmyadmin/config.inc.php
 mkdir /usr/share/phpmyadmin/tmp
 chmod 777 /usr/share/phpmyadmin/tmp
+
+
+
+
+
+apt-get update
+apt-get install snapd
+snap install core
+snap install --classic certbot
+certbot --nginx
+ln -s /snap/bin/certbot 
+certbot --nginx
