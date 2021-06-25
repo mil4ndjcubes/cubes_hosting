@@ -123,3 +123,21 @@ snap install --classic certbot
 certbot --nginx
 ln -s /snap/bin/certbot 
 certbot --nginx
+
+
+
+
+apt-get update
+apt-get install salt-master
+apt-get install salt-syndic
+service salt-master restart
+sudo salt-key -A
+
+
+
+
+
+apt-get update
+apt-get install salt-minion
+apt-get install salt-syndic
+service salt-minion restart
