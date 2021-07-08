@@ -50,10 +50,9 @@ apt-get -y install mariadb-server
 wget -O /etc/mysql/mariadb.conf.d/99-performance-tunning.cnf https://raw.githubusercontent.com/cubes-doo/hosting/master/configs/mysql/mariadb.conf.d/99-performance-tunning.cnf
 systemctl enable mariadb
 systemctl restart mariadb
-mysql
-MariaDB ~ CREATE USER 'phpmyadmin'@'%' IDENTIFIED BY '********';
-MariaDB ~ GRANT ALL PRIVILEGES ON *.* TO 'phpmyadmin'@'%' WITH GRANT OPTION;
-MariaDB ~ FLUSH PRIVILEGES;
+mysql -e "CREATE USER 'phpmyadmin'@'%' IDENTIFIED BY '********';"
+mysql -e "GRANT ALL PRIVILEGES ON *.* TO 'phpmyadmin'@'%' WITH GRANT OPTION;"
+musql -e "FLUSH PRIVILEGES;"
 
 
 
