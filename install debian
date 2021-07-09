@@ -136,6 +136,15 @@ sudo salt-key -A
 
 
 
+wget -O - https://deb.goaccess.io/gnugpg.key | gpg --dearmor | tee /usr/share/keyrings/goaccess.gpg >/dev/null
+echo "deb [signed-by=/usr/share/keyrings/goaccess.gpg] https://deb.goaccess.io/ $(lsb_release -cs) main" | tee /etc/apt/sources.list.d/goaccess.list
+apt-get update
+apt-get install goaccess
+
+
+
+
+
 apt-get update
 apt-get install salt-minion
 apt-get install salt-syndic
