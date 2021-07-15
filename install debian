@@ -168,9 +168,7 @@ cp -v /lib/x86_64-linux-gnu/{libncurses.so.5,libtinfo.so.5,libdl.so.2,libc.so.6}
 cp -v /lib64/ld-linux-x86-64.so.2 $D/lib64/
 cp -va /lib/x86_64-linux-gnu/libnss_files* $D/lib/x86_64-linux-gnu/
 mkdir -p $D/etc/
-adduser cubes
 cp -vf /etc/{passwd,group} $D/etc/
-nano /etc/ssh/sshd_config
 wget -O /etc/ssh/sshd_config https://raw.githubusercontent.com/mil4ndjcubes/cubes_hosting/main/sshd.config
 systemctl restart sshd.service
 /etc/init.d/ssh restart
