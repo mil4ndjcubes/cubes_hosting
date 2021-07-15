@@ -148,13 +148,6 @@ apt-get install goaccess
 
 
 
-apt-get update
-apt-get install salt-minion
-apt-get install salt-syndic
-service salt-minion restart
-
-
-
 
 
 D=/var/www
@@ -186,5 +179,20 @@ cp -v /bin/date $D/bin/
 mkdir -p $D/home/cubes
 chown -R cubes:cubes $D/home/cubes/
 chmod -R 0700 $D/home/cubes/
+
+
+
+
+
+apt-get update
+apt-get install salt-minion
+apt-get install salt-syndic
+service salt-minion restart
+
+
+
+
+
+
 
 
