@@ -171,7 +171,6 @@ mkdir -p $D/etc/
 cp -vf /etc/{passwd,group} $D/etc/
 wget -O /etc/ssh/sshd_config https://raw.githubusercontent.com/mil4ndjcubes/cubes_hosting/main/sshd.config
 systemctl restart sshd.service
-/etc/init.d/ssh restart
 cp -v /bin/ls $D/bin/
 cp -v /bin/date $D/bin/
 mkdir -p $D/home/cubes
