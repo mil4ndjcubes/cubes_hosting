@@ -2,7 +2,8 @@ ssh key-gen
 ssh-copy-id
 mkdir ~/.ssh
 cd ~/.ssh
-nano authorized_keys  # Kopiramo ssh kljuc
+nano authorized_keys  
+# Kopiramo ssh kljuc
 wget -O /etc/ssh/sshd_config https://raw.githubusercontent.com/cubes-doo/hosting/master/configs/ssh/sshd_config
 service sshd restart
 
