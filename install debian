@@ -176,6 +176,7 @@ chown cubes: /var/www/home/cubes
 chmod 700 /var/www/home/cubes
 touch /home/chroot.sh
 wget -O /home/chroot.sh https://raw.githubusercontent.com/mil4ndjcubes/cubes_hosting/main/chroot.sh
+cd /home
 chmod +x chroot.sh
 ./chroot.sh /bin/{ls,cat,echo,rm,vi,date,mkdir}
 
