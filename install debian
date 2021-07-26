@@ -174,7 +174,8 @@ systemctl restart sshd
 mkdir -p /var/www/home/cubes
 chown cubes: /var/www/home/cubes
 chmod 700 /var/www/home/cubes
-nano chroot.sh
+touch /home/chroot.sh
+wget -O /home/chroot.sh https://raw.githubusercontent.com/mil4ndjcubes/cubes_hosting/main/chroot.sh
 chmod +x chroot.sh
 ./chroot.sh /bin/{ls,cat,echo,rm,vi,date,mkdir}
 
