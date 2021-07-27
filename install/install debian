@@ -157,3 +157,17 @@ apt-get update
 apt-get install salt-minion
 apt-get install salt-syndic
 service salt-minion restart
+
+
+apt-get -y install sshguard 
+wget -O /etc/sshguard/sshguard.conf https://raw.githubusercontent.com/mil4ndjcubes/cubes_hosting/master/config/sshguard.conf
+mkdir /var/db
+mkdir /var/db/sshguard
+cd /var/db/sshguard
+touch blacklist.db
+cd /etc/sshguard
+touch sshg-fw-nft-sets
+wget -O /etc/sshguard/sshg-fw-nft-sets https://raw.githubusercontent.com/mil4ndjcubes/cubes_hosting/master/config/sshg-fw-nft-sets
+chmod +x sshg-fw-nft-sets 
+systemctl enable sshguard
+systemctl restart sshguard
