@@ -113,7 +113,7 @@ apt-get update
 apt-get install salt-master
 apt-get install salt-syndic
 service salt-master restart
-sudo salt-key -A
+salt-key -A
 
 
 
