@@ -140,7 +140,7 @@ cp /lib/x86_64-linux-gnu/{libtinfo.so.6,libdl.so.2,libc.so.6} /var/www/lib/x86_6
 cp /lib64/ld-linux-x86-64.so.2 /var/www/lib64
 mkdir /var/www/etc
 cp /etc/{passwd,group} /var/www/etc
-wget -O /etc/ssh/sshd_config https://raw.githubusercontent.com/mil4ndjcubes/cubes_hosting/main/sshd.config
+wget -O /etc/ssh/sshd_config https://raw.githubusercontent.com/mil4ndjcubes/cubes_hosting/master/config/sshd_config
 systemctl restart sshd
 mkdir -p /var/www/home/cubes
 chown cubes: /var/www/home/cubes
