@@ -32,8 +32,8 @@ fw_init() {
     run_nft "add set" "${NFT_SET} { type ipv6_addr; flags interval; }" 6
 
     # Rule to drop sets' IP
-    run_nft "add rule" "${NFT_CHAIN} ip saddr @${NFT_SET} tcp dport {2560,21} log prefix nft-sshg-block drop" 4
-    run_nft "add rule" "${NFT_CHAIN} ip6 saddr @${NFT_SET} tcp dport {2560,21} log prefix nft-sshg-block drop" 6
+    run_nft "add rule" "${NFT_CHAIN} ip saddr @${NFT_SET} tcp dport {2560,21} drop" 4
+    run_nft "add rule" "${NFT_CHAIN} ip6 saddr @${NFT_SET} tcp dport {2560,21} drop" 6
 }
 
 fw_block() {
@@ -86,3 +86,4 @@ while read cmd address addrtype cidr; do
             die 65 "Invalid command";;
     esac
 done
+
