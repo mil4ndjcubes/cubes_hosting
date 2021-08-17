@@ -100,8 +100,7 @@ apt-get update
 apt-get install snapd
 snap install core
 snap install --classic certbot
-certbot --nginx
-ln -s /snap/bin/certbot 
+ln -s /snap/bin/certbot /usr/bin/certbot 
 certbot --nginx
 
 
@@ -146,7 +145,7 @@ touch /home/chroot.sh
 wget -O /home/chroot.sh https://raw.githubusercontent.com/mil4ndjcubes/cubes_hosting/master/scripts/chroot.sh
 cd /home
 chmod +x chroot.sh
-./chroot.sh /bin/{ls,cat,echo,rm,vi,date,mkdir}
+./chroot.sh /bin/{ls,cat,echo,rm,vi,date,mkdir,git}
 
 
 
