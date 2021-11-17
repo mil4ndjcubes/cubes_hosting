@@ -2,19 +2,8 @@ apt-get -y update
 apt-get -y upgrade
 apt-get -y install locales-all
 
-
-
-ssh key-gen
-ssh-copy-id
-mkdir ~/.ssh
-cd ~/.ssh
-nano authorized_keys  
-# Kopiramo ssh kljuc
-wget -O /etc/ssh/sshd_config https://raw.githubusercontent.com/cubes-doo/hosting/master/configs/ssh/sshd_config
-service sshd restart
-
-
-
+ 
+ 
 echo 'export HISTTIMEFORMAT="%d.%m.%Y %T "' >> /etc/profile.d/hist.sh
 . /etc/profile.d/hist.sh
 
@@ -71,7 +60,6 @@ touch /etc/vsftpd/users.passwd
 wget -O /etc/vsftpd/users/website.rs https://raw.githubusercontent.com/mil4ndjcubes/cubes_hosting/master/config/vsftpd.user.conf
 systemctl enable vsftpd
 systemctl restart vsftpd
-./ftp_users_passwd.sh
 
 						
 							
