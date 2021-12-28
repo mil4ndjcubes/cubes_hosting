@@ -2,19 +2,13 @@ apt-get -y update
 apt-get -y upgrade
 apt-get -y install locales-all
 
- 
- 
 echo 'export HISTTIMEFORMAT="%d.%m.%Y %T "' >> /etc/profile.d/hist.sh
 . /etc/profile.d/hist.sh
-
-		
-    
+  
 apt install nftables
 wget -O /etc/nftables.conf https://raw.githubusercontent.com/cubes-doo/hosting/master/configs/nftables/nftables.conf
 systemctl enable nftables
-systemctl restart nftables
-
-					
+systemctl restart nftables					
 							
 apt-get -y install curl gnupg2 ca-certificates lsb-release
 echo "deb http://nginx.org/packages/debian `lsb_release -cs` nginx" | tee /etc/apt/sources.list.d/nginx.list
@@ -30,9 +24,7 @@ wget -O /etc/nginx/nginx.conf https://raw.githubusercontent.com/cubes-doo/hostin
 wget -O /etc/nginx/conf.d/default.conf https://raw.githubusercontent.com/cubes-doo/hosting/master/configs/nginx/conf.d/default.conf
 wget -O /etc/nginx/conf.d/fastcgi_cache.conf https://raw.githubusercontent.com/cubes-doo/hosting/master/configs/nginx/conf.d/fastcgi_cache.conf
 wget -O /usr/share/nginx/html/index.html https://raw.githubusercontent.com/cubes-doo/hosting/master/files/index.html
-service nginx restart
-
-						
+service nginx restart						
 					
 apt-get -y install mariadb-server
 wget -O /etc/mysql/mariadb.conf.d/99-performance-tunning.cnf https://raw.githubusercontent.com/cubes-doo/hosting/master/configs/mysql/mariadb.conf.d/99-performance-tunning.cnf
@@ -41,15 +33,7 @@ systemctl restart mariadb
 mysql -e "CREATE USER 'phpmyadmin'@'%' IDENTIFIED BY '********';"
 mysql -e "GRANT ALL PRIVILEGES ON *.* TO 'phpmyadmin'@'%' WITH GRANT OPTION;"
 mysql -e "FLUSH PRIVILEGES;"
-
-
-
-/etc/mysql# mysqldump -u phpmyadmin -p CubesDB > ~/cubesdb.sql # Export baze
-/etc/mysql# mysql -u phpmyadmin -p CubesDB < ~/cubesdb.sql # Import baze
-service mariadb restart
-
-							
-												
+																		
 apt-get -y install vsftpd libpam-pwdfile apache2-utils whois
 mkdir -p /etc/vsftpd/users
 wget -O /etc/vsftpd.conf https://raw.githubusercontent.com/cubes-doo/hosting/master/configs/vsftpd/vsftpd.conf
@@ -60,9 +44,7 @@ touch /etc/vsftpd/users.passwd
 wget -O /etc/vsftpd/users/website.rs https://raw.githubusercontent.com/mil4ndjcubes/cubes_hosting/master/config/vsftpd.user.conf
 systemctl enable vsftpd
 systemctl restart vsftpd
-
-						
-							
+												
 apt-get -y install apt-transport-https lsb-release ca-certificates curl
 curl -sSL -o /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
 sh -c 'echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list'
@@ -71,9 +53,7 @@ apt-get -y install php7.4-fpm php7.4-cli php7.4-mbstring php7.4-mysql
 wget -O /etc/php/7.4/fpm/pool.d/www.conf https://raw.githubusercontent.com/cubes-doo/hosting/master/configs/php/fpm/pool.d/www.conf
 systemctl enable php7.4-fpm
 systemctl restart php7.4-fpm
-
-												
-							
+																		
 wget https://files.phpmyadmin.net/phpMyAdmin/5.0.4/phpMyAdmin-5.0.4-all-languages.tar.gz
 tar -xzf phpMyAdmin-5.0.4-all-languages.tar.gz
 mv phpMyAdmin-5.0.4-all-languages /usr/share/phpmyadmin
@@ -82,8 +62,6 @@ wget -O /usr/share/phpmyadmin/config.inc.php https://raw.githubusercontent.com/c
 mkdir /usr/share/phpmyadmin/tmp
 chmod 777 /usr/share/phpmyadmin/tmp
 
-
-
 apt-get update
 apt-get install snapd
 snap install core
@@ -91,22 +69,16 @@ snap install --classic certbot
 ln -s /snap/bin/certbot /usr/bin/certbot 
 certbot --nginx
 
-
-
 apt-get update
 apt-get install salt-master
 apt-get install salt-syndic
 service salt-master restart
 salt-key -A
 
-
-
 wget -O - https://deb.goaccess.io/gnugpg.key | gpg --dearmor | tee /usr/share/keyrings/goaccess.gpg >/dev/null
 echo "deb [signed-by=/usr/share/keyrings/goaccess.gpg] https://deb.goaccess.io/ $(lsb_release -cs) main" | tee /etc/apt/sources.list.d/goaccess.list
 apt-get update
 apt-get install goaccess
-
-
 
 mkdir /var/www
 mkdir /var/www/dev		
@@ -135,13 +107,10 @@ cd /home
 chmod +x chroot.sh
 ./chroot.sh /bin/{ls,cat,echo,rm,vi,date,mkdir,git}
 
-
-
 apt-get update
 apt-get install salt-minion
 apt-get install salt-syndic
 service salt-minion restart
-
 
 apt-get -y install sshguard 
 wget -O /etc/sshguard/sshguard.conf https://raw.githubusercontent.com/mil4ndjcubes/cubes_hosting/master/config/sshguard.conf
@@ -155,8 +124,6 @@ wget -O /etc/sshguard/sshg-fw-nft-sets https://raw.githubusercontent.com/mil4ndj
 chmod +x sshg-fw-nft-sets 
 systemctl enable sshguard
 systemctl restart sshguard
-
-
 
 wget https://repo.zabbix.com/zabbix/5.4/debian/pool/main/z/zabbix-release/zabbix-release_5.4-1+debian10_all.deb
 dpkg -i zabbix-release_5.4-1+debian10_all.deb
