@@ -19,7 +19,7 @@ wget -O /etc/mysql/mariadb.conf.d/99-performance-tunning.cnf https://raw.githubu
 systemctl enable mariadb
 systemctl restart mariadb
 mysql -e "create database zabbix character set utf8 collate utf8_bin";
-mysql -e "create user zabbix@localhost identified by '$ZABBIX_PASS';"
+mysql -e "create user zabbix@localhost identified by $ZABBIX_PASS;"
 mysql -e "grant all privileges on zabbix.* to zabbix@localhost;"
 mysql -e "FLUSH PRIVILEGES;"
 
