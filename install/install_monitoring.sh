@@ -28,6 +28,6 @@ dpkg -i zabbix-release_5.4-1+debian10_all.deb
 apt-get -y update
 apt-get -y install zabbix-server-mysql zabbix-frontend-php zabbix-apache-conf zabbix-sql-scripts zabbix-agent
 zcat /usr/share/doc/zabbix-sql-scripts/mysql/create.sql.gz | mysql -uzabbix -p$ZABBIX_PASS zabbix
-wget -O /etc/zabbix/zabbix_server.conf https://raw.githubusercontent.com/mil4ndjcubes/cubes_hosting/master/config/zabbix_server.conf?token=GHSAT0AAAAAABP52Z3SFLW6CXPUESM2KUDEYPH3XLQ
+wget -O /etc/zabbix/zabbix_server.conf https://raw.githubusercontent.com/mil4ndjcubes/cubes_hosting/master/config/zabbix_server.conf
 systemctl enable zabbix-server zabbix-agent apache2
 systemctl restart zabbix-server zabbix-agent apache2
