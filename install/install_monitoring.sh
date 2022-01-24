@@ -18,7 +18,7 @@ wget -O /etc/mysql/my.cnf https://raw.githubusercontent.com/cubes-doo/hosting/ma
 wget -O /etc/mysql/mariadb.conf.d/99-performance-tunning.cnf https://raw.githubusercontent.com/cubes-doo/hosting/master/configs/mysql/mariadb.conf.d/99-performance-tunning.cnf
 systemctl enable mariadb
 systemctl restart mariadb
-mysql -e "create database zabbix character set utf8 collate utf8_bin";
+mysql -e "create database zabbix character set utf8 collate utf8_bin;"
 mysql -e "create user zabbix@localhost;"
 mysql -e "SET PASSWORD FOR 'zabbix'@'localhost' = PASSWORD('$MYSQL_ZABBIX_PWD');"
 mysql -e "grant all privileges on zabbix.* to zabbix@localhost;"
