@@ -1,0 +1,61 @@
+- name: Configure webserver with nginx
+  hosts: webservers
+  become: True
+  tasks:
+
+    - name: copy nginx config file
+      copy: src=/root/templates/24sedam.rs.conf dest=/etc/nginx/sites-available/24sedam.rs.conf
+
+    - name: enable configuration
+      file: >
+        dest=/etc/nginx/sites-enabled/24sedam.rs.conf
+        src=/etc/nginx/sites-available/24sedam.rs.conf
+        state=link
+    
+    - name: Creates directory 24sedam.rs
+      file:
+        path: /var/www/24sedam.rs
+        state: directory
+        owner: root
+        group: root
+
+    - name: Creates directory www-root
+      file:
+        path: /var/www/24sedam.rs/www-root
+        state: directory
+        owner: cubes
+        group: cubes
+
+    - name: Creates directory logs
+      file:
+        path: /var/www/24sedam.rs/logs
+        state: directory
+        owner: root
+        group: root
+
+    - name: Creates directory 24sedam-front
+      file:
+        path: /var/www/24sedam.rs/www-root/24sedam-front
+        state: directory
+        owner: cubes
+        group: cubes
+
+    - name: Creates directory data
+      file:
+        path: /var/www/24sedam.rs/www-root/data
+        state: directory
+        owner: cubes
+        group: cubes
+
+    - name: Creates directory public
+      file:
+        path: /var/www/24sedam.rs/www-root/24sedam-front/public
+        state: directory
+        owner: cubes
+        group: cubes
+
+    - name: reload nginx
+      service: name=nginx state=relaoded
+
+
+
