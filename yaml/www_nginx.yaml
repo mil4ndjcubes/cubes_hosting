@@ -55,7 +55,7 @@
         group: cubes
 
     - name: reload nginx
-      service: name=nginx state=relaoded
+      service: name=nginx state=reloaded
 
 
 
