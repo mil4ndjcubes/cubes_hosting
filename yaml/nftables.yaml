@@ -1,0 +1,11 @@
+- name: Ansible Copy nftables Local to Remote
+  hosts: all
+  tasks:
+    - name: copying nftables conf file with playbook
+      become: true 
+      copy:
+        src: /root/ansible_templates/nftables.conf
+        dest: /etc/nftables.conf
+   
+    - name: restart nftables
+      service: name=nftables state=restarted
