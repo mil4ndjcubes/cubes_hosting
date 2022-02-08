@@ -2,6 +2,9 @@
   hosts: webservers
   become: True
   tasks:
+  
+    - name: install nginx
+      apt: name=nginx update_cache=yes
 
     - name: copy nginx config file
       copy: src=/root/templates/WEBSITE.conf dest=/etc/nginx/sites-available/WEBSITE.rs.conf
